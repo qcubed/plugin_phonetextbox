@@ -24,6 +24,10 @@ $txtBox->Name = 'Home Phone';
 $txtBox->Text = $this->objPeople->HomePhone;
 
 **********************************************************/
+
+namespace QCubed\Plugin;
+
+use \QTextBox;
 	
 class QPhoneTextBox extends QTextBox {
 	//////////

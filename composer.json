@@ -9,5 +9,8 @@
     },
     "autoload": {
         "psr-0": { "": "includes/" }
+    },
+    "extra": {
+        "examples": ["phonetextbox.php"]
     }
 }

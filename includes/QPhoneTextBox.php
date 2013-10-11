@@ -2,11 +2,11 @@
 
 /*********************************************************
 
-PhoneTextBox
+QPhoneTextBox
 
-A subclass of QTextBox. 
+Contributors:	Michael Ho, Shannon Pekary, Alex Weinstein
 
-	Contributors:	Michael Ho, Shannon Pekary, Alex Weinstein
+Installation: 	From Composer, require "qcubed/plugins/QPhoneTextBox": "dev-master"
 
 This text box validates based on the North American phone format of (xxx) xxx-xxxx, and reformats the phone if it's entered differently. 
 

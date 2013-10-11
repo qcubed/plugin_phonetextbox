@@ -13,9 +13,6 @@ This text box validates based on the North American phone format of (xxx) xxx-xx
 Blank items are allowed. If the user does not enter anything, then the area code will be removed so that
 it will be blank
 
-WARNING: This class adds javascript onblur and onfocus events. If you remove all javascript actions, you will inadvertently
-remove these as well. You can use the public AddPrivateBlurAction and AddPrivateFocusAction to put them back if necessary.
-
 Usage example:
 
 $defaultAreaCode = "650";
@@ -25,26 +22,20 @@ $txtBox->Text = $this->objPeople->HomePhone;
 
 **********************************************************/
 
-namespace QCubed\Plugin;
-
-use \QTextBox;
+// We will use these when Composer goes to PSR-4
+//namespace QCubed\Plugin;
+//use \QTextBox;
 	
 class QPhoneTextBox extends QTextBox {
-	//////////
-	// Member Variables
-	//////////
-	
+
+	/** @var string */
 	protected $strDefaultAreaCode;	// set this to the default area code to enter in the box when the field is entered. 
-								// this will help users enter the information.
 	
-	//////////
-	// Methods
-	//////////
 	
 	public function __construct($objParentObject, $strDefaultAreaCode = null, $strControlId = null) {
 		parent::__construct($objParentObject, $strControlId);
 		
-		$this->AddPluginJavascriptFile("QPhoneTextBox", "qcubed.phonetextbox.js");
+		$this->AddPluginJavascriptFile("QPhoneTextBox", "jquery.phonetextbox.js");
 		
 		$this->strDefaultAreaCode = $strDefaultAreaCode;
 	}

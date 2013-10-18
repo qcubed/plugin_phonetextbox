@@ -35,7 +35,7 @@ class QPhoneTextBox extends QTextBox {
 	public function __construct($objParentObject, $strDefaultAreaCode = null, $strControlId = null) {
 		parent::__construct($objParentObject, $strControlId);
 		
-		$this->AddPluginJavascriptFile("QPhoneTextBox", "jquery.phonetextbox.js");
+		$this->AddPluginJavascriptFile("phonetextbox", "jquery.phonetextbox.js");
 		
 		$this->strDefaultAreaCode = $strDefaultAreaCode;
 	}

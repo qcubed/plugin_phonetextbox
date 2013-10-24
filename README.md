@@ -32,7 +32,7 @@ This control is now installable by Composer. To install, add the following to th
 and
 ```
 	"require": {
-		"qcubed/plugins/QPhoneTextBox": "dev-master"
+		"qcubed/plugin/QPhoneTextBox": "dev-master"
 	},
 
 ```

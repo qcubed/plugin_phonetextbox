@@ -1,5 +1,5 @@
 {
-    "name": "qcubed/plugins/phonetextbox",
+    "name": "qcubed/plugin/phonetextbox",
     "description": "QCubed text box plugin that validates U.S. phone numbers.",
     "type": "library",
     "keywords": ["qcubed", "phone"],

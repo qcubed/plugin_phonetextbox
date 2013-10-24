@@ -25,14 +25,14 @@ This control is now installable by Composer. To install, add the following to th
 	"repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/qcubed/QPhoneTextBox"
+            "url": "https://github.com/qcubed/plugin_phonetextbox"
         }
     ],
 ```    
 and
 ```
 	"require": {
-		"qcubed/plugin/QPhoneTextBox": "dev-master"
+		"qcubed/plugin/phonetextbox": "dev-master"
 	},
 
 ```

@@ -29,15 +29,13 @@ $txtBox->Text = $this->objPeople->HomePhone;
 class QPhoneTextBox extends QTextBox {
 
 	/** @var string */
-	protected $strDefaultAreaCode;	// set this to the default area code to enter in the box when the field is entered. 
+	protected $strDefaultAreaCode = null;	// set this to the default area code to enter in the box when the field is entered.
 	
 	
-	public function __construct($objParentObject, $strDefaultAreaCode = null, $strControlId = null) {
+	public function __construct($objParentObject, $strControlId = null) {
 		parent::__construct($objParentObject, $strControlId);
 		
 		$this->AddPluginJavascriptFile("phonetextbox", "jquery.phonetextbox.js");
-		
-		$this->strDefaultAreaCode = $strDefaultAreaCode;
 	}
 	
 	protected function makeJsProperty($strProp, $strKey) {
@@ -74,7 +72,11 @@ class QPhoneTextBox extends QTextBox {
 		if (parent::Validate()) {
 			$this->strText = trim ($this->strText);
 			if ($this->strText != "") {
-				$pattern = "(\(||\[)?\d{3}(\)||\])?[-\s.]+\d{3}[-\s.]+\d{4}( x\d+)?$"; // standard phone
+				if ($this->strDefaultAreaCode) {
+					$pattern = "(\(||\[)?\d{3}(\)||\])?[-\s.]+\d{3}[-\s.]+\d{4}( x\d+)?$"; // standard phone
+				} else {
+					$pattern = "((\(||\[)?\d{3}(\)||\])?[-\s.]+)?\d{3}[-\s.]+\d{4}( x\d+)?$"; // optional area code
+				}
 					
 				if (! preg_match("/$pattern/", $this->strText)) {
 					$this->strValidationError = QApplication::Translate("Invalid phone number");

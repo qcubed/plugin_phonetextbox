@@ -124,5 +124,10 @@ class QPhoneTextBox extends QTextBox {
 		}
 	}
 
+	public static function GetMetaParams() {
+		return array_merge(parent::GetMetaParams(), array(
+			new QMetaParam (get_called_class(), 'DefaultAreaCode', '', QType::String)
+		));
+	}
 }
 ?>

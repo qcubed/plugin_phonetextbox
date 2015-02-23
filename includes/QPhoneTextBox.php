@@ -38,36 +38,29 @@ class QPhoneTextBox extends QTextBox {
 		$this->AddPluginJavascriptFile("phonetextbox", "jquery.phonetextbox.js");
 	}
 	
-	protected function makeJsProperty($strProp, $strKey) {
-		$objValue = $this->$strProp;
-		if (null === $objValue) {
-			return '';
-		}
-
-		return $strKey . ': ' . JavaScriptHelper::toJsObject($objValue) . ', ';
+	protected function makeJqOptions() {
+		$jqOptions = null;
+		if (!is_null($val = $this->DefaultAreaCode)) {$jqOptions['defaultAreaCode'] = $val;}
+		return $jqOptions;
 	}
 
-	protected function makeJqOptions() {
-		$strJqOptions = '';
-		$strJqOptions .= $this->makeJsProperty('DefaultAreaCode', 'defaultAreaCode');
-		if ($strJqOptions) $strJqOptions = substr($strJqOptions, 0, -2);
-		return $strJqOptions;
+	public function GetEndScript() {
+		$jqOptions = $this->makeJqOptions();
+		if (empty($jqOptions)) {
+			QApplication::ExecuteControlCommand($this->getJqControlId(), $this->getJqSetupFunction());
+		}
+		else {
+			QApplication::ExecuteControlCommand($this->getJqControlId(), $this->getJqSetupFunction(), $jqOptions);
+		}
+
+		return parent::GetEndScript();
 	}
 
 
 	public function getJqSetupFunction() {
 		return 'phoneTextBox';
 	}
-	
-	public function getControlJavaScript() {
-		return sprintf('jQuery("#%s").%s({%s})', $this->getJqControlId(), $this->getJqSetupFunction(), $this->makeJqOptions());
-	}
 
-	public function GetEndScript() {
-		return $this->getControlJavaScript() . '; ' . parent::GetEndScript();
-	}
-	
-	
 	public function Validate() {
 		if (parent::Validate()) {
 			$this->strText = trim ($this->strText);
@@ -124,9 +117,9 @@ class QPhoneTextBox extends QTextBox {
 		}
 	}
 
-	public static function GetMetaParams() {
-		return array_merge(parent::GetMetaParams(), array(
-			new QMetaParam (get_called_class(), 'DefaultAreaCode', '', QType::String)
+	public static function GetModelConnectorParams() {
+		return array_merge(parent::GetModelConnectorParams(), array(
+			new QModelConnectorParam (get_called_class(), 'DefaultAreaCode', '', QType::String)
 		));
 	}
 }

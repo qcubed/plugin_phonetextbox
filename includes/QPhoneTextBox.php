@@ -72,7 +72,7 @@ class QPhoneTextBox extends QTextBox {
 				}
 					
 				if (! preg_match("/$pattern/", $this->strText)) {
-					$this->strValidationError = QApplication::Translate("Invalid phone number");
+					$this->ValidationError = QApplication::Translate("Invalid phone number");
 					return false;
 				}
 			}
@@ -117,6 +117,18 @@ class QPhoneTextBox extends QTextBox {
 		}
 	}
 
+
+	/**
+	 * Required to allow this to be part of the code generation process. Must match with superclass.
+	 * @return QTextBox_CodeGenerator
+	 */
+	public static function GetCodeGenerator () {
+		return new QTextBox_CodeGenerator(get_class());
+	}
+
+	/**
+	 * @return array|QModelConnectorParam[]
+	 */
 	public static function GetModelConnectorParams() {
 		return array_merge(parent::GetModelConnectorParams(), array(
 			new QModelConnectorParam (get_called_class(), 'DefaultAreaCode', '', QType::String)

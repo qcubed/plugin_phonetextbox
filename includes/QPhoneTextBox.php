@@ -37,7 +37,7 @@ class QPhoneTextBox extends QTextBox {
 		
 		$this->AddPluginJavascriptFile("phonetextbox", "jquery.phonetextbox.js");
 	}
-	
+
 	protected function makeJqOptions() {
 		$jqOptions = null;
 		if (!is_null($val = $this->DefaultAreaCode)) {$jqOptions['defaultAreaCode'] = $val;}
@@ -45,15 +45,18 @@ class QPhoneTextBox extends QTextBox {
 	}
 
 	public function GetEndScript() {
+		$strRet = '';
+		$strId = $this->getJqControlId();
 		$jqOptions = $this->makeJqOptions();
-		if (empty($jqOptions)) {
-			QApplication::ExecuteControlCommand($this->getJqControlId(), $this->getJqSetupFunction());
-		}
-		else {
-			QApplication::ExecuteControlCommand($this->getJqControlId(), $this->getJqSetupFunction(), $jqOptions);
-		}
+		$strFunc = $this->getJqSetupFunction();
 
-		return parent::GetEndScript();
+		$strParams = '';
+		if (!empty($jqOptions)) {
+			$strParams = JavaScriptHelper::toJsObject($jqOptions);
+		}
+		$strRet .= "\$j('#{$strId}').{$strFunc}({$strParams});"  . _nl();
+
+		return $strRet . parent::GetEndScript();
 	}
 
 
@@ -93,9 +96,18 @@ class QPhoneTextBox extends QTextBox {
 					throw $objExc;
 				}
 
+
+			case "Text":
+			case "Value":
+				parent::__set($strName, $mixValue);
+				// Reformat after a change. Can't detect this kind of change just in JavaScript.
+				QApplication::ExecuteControlCommand($this->getJqControlId(), $this->getJqSetupFunction(), 'checkChanged', QJsPriority::Low);
+				break;
+
+
 			default:
 				try {
-					return parent::__set($strName, $mixValue);
+					parent::__set($strName, $mixValue);
 				} catch (QCallerException $objExc) {
 					$objExc->IncrementOffset();
 					throw $objExc;

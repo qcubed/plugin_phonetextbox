@@ -1,7 +1,7 @@
 {
-    "name": "qcubed/plugin/phonetextbox",
+    "name": "qcubed/plugin_phonetextbox",
     "description": "QCubed text box plugin that validates U.S. phone numbers.",
-    "type": "library",
+    "type": "qcubed-plugin",
     "keywords": ["qcubed", "phone"],
     "license": "MIT",
     "require": {

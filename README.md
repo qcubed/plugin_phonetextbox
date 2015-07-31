@@ -20,23 +20,11 @@ Note that the control currently supports only North American phone formats -
 it can be easily extended to support other formats as well. If you do end up
 writing an extension of this control, please do share it.
 
-This control is now installable by Composer. To install, add the following to the corresponding sections of your composer.json root file:
+This control is now installable by Composer. To install, execute the following on your command line
+from within your main installation directory:
 ```
-	"repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/qcubed/plugin_phonetextbox"
-        }
-    ],
+	composer require qcubed/plugin_phonetextbox
 ```    
-and
-```
-	"require": {
-		"qcubed/plugin_phonetextbox": "dev-master"
-	},
-
-```
-
 
 ## jquery.phonetextbox.js
 The jQuery code this is based on is also a standalone jQuery plugin. The plugin requires jQuery UI 1.9 or greater, as it uses the jQuery widget factory. See the comments there for usage.

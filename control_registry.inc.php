@@ -6,16 +6,6 @@
  * in the ControlClass entry.
  */
 
-$controls[QDatabaseFieldType::VarChar][] = 'QPhoneTextBox';
-//$controls[QDatabaseFieldType::Blob][] = '';
-//$controls[QDatabaseFieldType::Char][] = '';
-//$controls[QDatabaseFieldType::Integer][] = '';
-//$controls[QDatabaseFieldType::Float][] = '';
-//$controls[QDatabaseFieldType::Bit][] = '';
-//$controls[QDatabaseFieldType::DateTime][] = '';
-//$controls[QDatabaseFieldType::Date][] = '';
-//$controls[QDatabaseFieldType::Time][] = '';
-//$controls[QType::ArrayType][] = ''; // Many-to-one. Includes forward and unique reverse references.
-//$controls[QType::Association][] = ''; // Many-to-many.
+$controls[QControlCategoryType::Text][] = 'QPhoneTextBox';
 
 ?>

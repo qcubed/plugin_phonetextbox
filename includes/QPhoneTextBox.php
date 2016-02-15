@@ -45,18 +45,24 @@ class QPhoneTextBox extends QTextBox {
 	}
 
 	public function GetEndScript() {
-		$strRet = '';
-		$strId = $this->getJqControlId();
+		$strId = $this->GetJqControlId();
 		$jqOptions = $this->makeJqOptions();
 		$strFunc = $this->getJqSetupFunction();
 
-		$strParams = '';
-		if (!empty($jqOptions)) {
-			$strParams = JavaScriptHelper::toJsObject($jqOptions);
+		if ($strId !== $this->ControlId && QApplication::$RequestMode == QRequestMode::Ajax) {
+			// If events are not attached to the actual object being drawn, then the old events will not get
+			// deleted during redraw. We delete the old events here. This must happen before any other event processing code.
+			QApplication::ExecuteControlCommand($strId, 'off', QJsPriority::High);
 		}
-		$strRet .= "\$j('#{$strId}').{$strFunc}({$strParams});"  . _nl();
 
-		return $strRet . parent::GetEndScript();
+		// Attach the javascript widget to the html object
+		if (empty($jqOptions)) {
+			QApplication::ExecuteControlCommand($strId, $strFunc, QJsPriority::High);
+		} else {
+			QApplication::ExecuteControlCommand($strId, $strFunc, $jqOptions, QJsPriority::High);
+		}
+
+		return parent::GetEndScript();
 	}
 
 

@@ -1,26 +1,27 @@
 <?php
 
-/*********************************************************
 
-QPhoneTextBox
-
-Contributors:	Michael Ho, Shannon Pekary, Alex Weinstein
-
-Installation: 	From Composer, require "qcubed/plugins/QPhoneTextBox": "dev-master"
-
-This text box validates based on the North American phone format of (xxx) xxx-xxxx, and reformats the phone if it's entered differently. 
-
-Blank items are allowed. If the user does not enter anything, then the area code will be removed so that
-it will be blank
-
-Usage example:
-
-$defaultAreaCode = "650";
-$txtPhone = new QPhoneTextBox ($this, $defaultAreaCode);
-$txtBox->Name = 'Home Phone';
-$txtBox->Text = $this->objPeople->HomePhone;
-
-**********************************************************/
+/*
+ * QPhoneTextBox
+ *
+ * Contributors:	Michael Ho, Shannon Pekary, Alex Weinstein
+ *
+ * Installation: 	From Composer, require "qcubed/plugins/QPhoneTextBox": "dev-master"
+ *
+ * This text box validates based on the North American phone format of (xxx) xxx-xxxx, and reformats the phone if it's entered differently.
+ *
+ * Blank items are allowed. If the user does not enter anything, then the area code will be removed so that
+ * it will be blank
+ *
+ * Usage example:
+ * $defaultAreaCode = "650";
+ * $txtPhone = new QPhoneTextBox ($this, $defaultAreaCode);
+ * $txtBox->Name = 'Home Phone';
+ * $txtBox->Text = $this->objPeople->HomePhone;
+ *
+ *
+ * @property string $DefaultAreaCode
+ **/
 
 // We will use these when Composer goes to PSR-4
 //namespace QCubed\Plugin;
@@ -34,6 +35,7 @@ class QPhoneTextBox extends QTextBox {
 	
 	public function __construct($objParentObject, $strControlId = null) {
 		parent::__construct($objParentObject, $strControlId);
+		$this->TextMode = QTextMode::Tel;
 		
 		$this->AddPluginJavascriptFile("phonetextbox", "jquery.phonetextbox.js");
 	}
